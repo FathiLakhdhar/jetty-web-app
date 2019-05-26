@@ -3,20 +3,50 @@
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
 <web-app>
-  <display-name>Web Application</display-name>
-  
-  
-  <servlet>
-  	<servlet-name>StaticResourceServlet</servlet-name>
-  	<servlet-class>com.flk.servlets.UIServlet</servlet-class>
-  	<init-param>
-  		<param-name>distFolder</param-name>
-  		<param-value>/dist/</param-value>
-  	</init-param>
-  </servlet>
-  
-  <servlet-mapping>
-  	<servlet-name>StaticResourceServlet</servlet-name>
-  	<url-pattern>/ui/*</url-pattern>
-  </servlet-mapping>
+	<display-name>Web Application</display-name>
+
+	<servlet>
+		<servlet-name>Rest</servlet-name>
+		<servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
+		<load-on-startup>1</load-on-startup>
+		<init-param>
+			<param-name>jersey.config.server.provider.classnames</param-name>
+			<param-value>com.flk.rest.ProxyEntryPoint</param-value>
+		</init-param>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>Rest</servlet-name>
+		<url-pattern>/rest/*</url-pattern>
+	</servlet-mapping>
+
+
+	<servlet>
+		<servlet-name>StaticResourceServlet</servlet-name>
+		<servlet-class>com.flk.servlets.UIServlet</servlet-class>
+		<init-param>
+			<param-name>distFolder</param-name>
+			<param-value>/dist</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>StaticResourceServlet</servlet-name>
+		<url-pattern>/*</url-pattern>
+	</servlet-mapping>
+
+
+
+	<filter>
+		<filter-name>CSPFilter</filter-name>
+		<filter-class>com.flk.servlets.CSPFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>CSPFilter</filter-name>
+		<url-pattern>/</url-pattern>
+	</filter-mapping>
+
+
+	<!-- <filter> <filter-name>CorsFilter</filter-name> <filter-class>com.flk.servlets.CORSFilter</filter-class> 
+		</filter> <filter-mapping> <filter-name>CorsFilter</filter-name> <url-pattern>/*</url-pattern> 
+		</filter-mapping> -->
 </web-app>

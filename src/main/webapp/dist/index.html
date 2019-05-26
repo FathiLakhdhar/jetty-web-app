@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>dist index</title>
+    <base href="./ch"/>
+  </head>
+  <body>
+    <!-- Contenu de la page respectant la syntaxe XML. -->
+    <h1>Hello from dist/index.html</h1>
+    <script type="text/javascript" src="./script.js"></script>
+    <script nonce="">
+    	console.log("hello");
+    	setTimeout(function(){ 
+    		document.getElementsByTagName("h1")[0].style.color = "blue";
+    	}, 2000);
+    </script>
+    <script nonce="">
+	    setTimeout(function(){ 
+	    	document.getElementsByTagName("h1")[0].style.color = "blue";
+	    }, 4000);
+    </script>
+  </body>
+</html>

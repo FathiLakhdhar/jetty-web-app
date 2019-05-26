@@ -21,7 +21,33 @@
 			<version>2.5</version>
 			<scope>provided</scope>
 		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/commons-codec/commons-codec -->
+		<dependency>
+		    <groupId>commons-codec</groupId>
+		    <artifactId>commons-codec</artifactId>
+		    <version>1.9</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+		<dependency>
+		    <groupId>commons-io</groupId>
+		    <artifactId>commons-io</artifactId>
+		    <version>2.6</version>
+		</dependency>
+			
 
+		<!-- https://mvnrepository.com/artifact/javax.ws.rs/javax.ws.rs-api -->
+		<dependency>
+			<groupId>org.glassfish.jersey.core</groupId>
+			<artifactId>jersey-server</artifactId>
+			<version>2.7</version>
+		</dependency>
+		<dependency>
+			<groupId>org.glassfish.jersey.containers</groupId>
+			<artifactId>jersey-container-servlet-core</artifactId>
+			<version>2.7</version>
+		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-servlets -->
 		<dependency>
@@ -43,14 +69,13 @@
 					<webApp>
 						<contextPath>/ch</contextPath>
 					</webApp>
-					<contextHandlers> 
+					<!--contextHandlers> 
 						<contextHandler implementation="org.eclipse.jetty.maven.plugin.JettyWebAppContext"> 
 							<war>${basedir}/target/web-app.war</war>
 							<contextPath>/app</contextPath>
-							<!-- <descriptor>${basedir}/src/main/webapp/WEB-INF/web2.xml</descriptor> -->
 							<overrideDescriptor>${basedir}/src/main/webapp/WEB-INF/web2.xml</overrideDescriptor>
 						</contextHandler> 
-					</contextHandlers>
+					</contextHandlers-->
 				</configuration>
 			</plugin>
 		</plugins>
