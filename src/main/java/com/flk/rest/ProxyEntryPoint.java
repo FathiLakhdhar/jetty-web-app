@@ -6,13 +6,12 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-import javax.ws.rs.Path;
 import javax.ws.rs.core.Context;
 
-@Path("proxy")
 public class ProxyEntryPoint {
 	private final int ARBITARY_SIZE = 10048;
 	
@@ -23,22 +22,33 @@ public class ProxyEntryPoint {
 	
 	
 	@GET
-	public void Hello(@Context HttpServletResponse response) throws IOException{
+	public void Hello(@Context HttpServletResponse response) throws ServletException{
 		//return "Hello ^o^";
+		try {
+			InputStream in = ProxyEntryPoint.class.getClassLoader().getResourceAsStream("files/text.txt");
+			OutputStream out = response.getOutputStream();
 		
-		InputStream in = ProxyEntryPoint.class.getClassLoader().getResourceAsStream("files/text.txt");
-		OutputStream out = response.getOutputStream();
-	
-		response.setStatus(200);
-		response.setContentType("text/plain");
+			response.setStatus(200);
+			response.setContentType("text/plain");
+			
+			byte[] buffer = new byte[ARBITARY_SIZE];
+			int numBytesRead;
 		
-		byte[] buffer = new byte[ARBITARY_SIZE];
-		int numBytesRead;
-		while ((numBytesRead = in.read(buffer)) > 0) {
-			out.write(buffer, 0, numBytesRead);
+			while ((numBytesRead = in.read(buffer)) > 0) {
+					out.write(buffer, 0, numBytesRead);
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			throw new ServletException(e);
+		}finally{
+			try {
+				response.flushBuffer();
+			} catch (IOException e) {
+				throw new ServletException(e);
+			}
 		}
 		
-		response.flushBuffer();
+		
 	}
 	
 	@POST

@@ -1,0 +1,13 @@
+<!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "http://www.eclipse.org/jetty/configure.dtd">
+<Configure class="org.eclipse.jetty.webapp.WebAppContext">
+
+	<!-- configuration for deployment in standalone jetty (ignored by jetty-maven-plugin) -->
+	<Set name="contextPath">/ch</Set>
+
+	<Get class="java.lang.System" name="out">
+		<Call name="println">
+			<Arg>*** JETTY-WEB loaded</Arg>
+		</Call>
+	</Get>
+
+</Configure>

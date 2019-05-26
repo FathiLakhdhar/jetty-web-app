@@ -7,6 +7,14 @@
 	<version>1.0-SNAPSHOT</version>
 	<name>web-app Maven Webapp</name>
 	<url>http://maven.apache.org</url>
+	
+	
+	<properties>
+		<version.jetty>9.2.10.v20150310</version.jetty>
+		<version.jersey>2.23.1</version.jersey> 		
+	</properties>
+	
+	
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
@@ -22,38 +30,24 @@
 			<scope>provided</scope>
 		</dependency>
 		
-		<!-- https://mvnrepository.com/artifact/commons-codec/commons-codec -->
-		<dependency>
-		    <groupId>commons-codec</groupId>
-		    <artifactId>commons-codec</artifactId>
-		    <version>1.9</version>
-		</dependency>
-		
+
 		<!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
 		<dependency>
-		    <groupId>commons-io</groupId>
-		    <artifactId>commons-io</artifactId>
-		    <version>2.6</version>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.6</version>
 		</dependency>
-			
 
-		<!-- https://mvnrepository.com/artifact/javax.ws.rs/javax.ws.rs-api -->
-		<dependency>
-			<groupId>org.glassfish.jersey.core</groupId>
-			<artifactId>jersey-server</artifactId>
-			<version>2.7</version>
-		</dependency>
+
 		<dependency>
 			<groupId>org.glassfish.jersey.containers</groupId>
-			<artifactId>jersey-container-servlet-core</artifactId>
-			<version>2.7</version>
+			<artifactId>jersey-container-servlet</artifactId>
+			<version>${version.jersey}</version>
 		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-servlets -->
 		<dependency>
-			<groupId>org.eclipse.jetty</groupId>
-			<artifactId>jetty-servlets</artifactId>
-			<version>9.4.15.v20190215</version>
+			<groupId>org.glassfish.jersey.media</groupId>
+			<artifactId>jersey-media-json-jackson</artifactId>
+			<version>${version.jersey}</version>
 		</dependency>
 
 	</dependencies>
@@ -63,19 +57,19 @@
 			<plugin>
 				<groupId>org.eclipse.jetty</groupId>
 				<artifactId>jetty-maven-plugin</artifactId>
-				<version>9.4.15.v20190215</version>
+				<version>${version.jetty}</version>
 				<configuration>
-					<scanIntervalSeconds>10</scanIntervalSeconds>
+					<scanIntervalSeconds>2</scanIntervalSeconds>
+					<contextXml>${project.basedir}/src/main/webapp/WEB-INF/jetty-context.xml</contextXml>
 					<webApp>
-						<contextPath>/ch</contextPath>
+						<jettyEnvXml>${project.basedir}/src/main/webapp/WEB-INF/jetty-env.xml</jettyEnvXml>
 					</webApp>
-					<!--contextHandlers> 
-						<contextHandler implementation="org.eclipse.jetty.maven.plugin.JettyWebAppContext"> 
-							<war>${basedir}/target/web-app.war</war>
-							<contextPath>/app</contextPath>
+					<!--contextHandlers> <contextHandler implementation="org.eclipse.jetty.maven.plugin.JettyWebAppContext"> 
+						<war>${basedir}/target/web-app.war</war> <contextPath>/app</contextPath> 
+						<overrideDescriptor>${basedir}/src/main/webapp/WEB-INF/web2.xml</overrideDescriptor> 
 							<overrideDescriptor>${basedir}/src/main/webapp/WEB-INF/web2.xml</overrideDescriptor>
-						</contextHandler> 
-					</contextHandlers-->
+						<overrideDescriptor>${basedir}/src/main/webapp/WEB-INF/web2.xml</overrideDescriptor> 
+						</contextHandler> </contextHandlers -->
 				</configuration>
 			</plugin>
 		</plugins>
