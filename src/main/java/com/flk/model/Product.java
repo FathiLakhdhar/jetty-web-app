@@ -6,6 +6,8 @@ public class Product {
 	private String _detail;
 	private double _price;
 	
+	public Product() {}
+	
 	public Product(String name, String detail, double price) {
 		this._name = name;
 		this._detail = detail;
